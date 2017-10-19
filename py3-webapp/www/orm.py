@@ -10,7 +10,7 @@ import asyncio, logging
 import aiomysql
 
 def log(sql,args=()):
-	loggin.info('SQL: %s' %sql)
+	logging.info('SQL: %s' %sql)
 
 
 
@@ -22,9 +22,9 @@ async def create_pool(loop,**kw):
 	__pool = await aiomysql.create_pool(
 			host=kw.get('host','localhost'),
 			port=kw.get('port',3306),
-			user=kw['user'],
-			password=kw['password'],
-			db=kw['db'],
+			user=kw.get('user','root'),
+			password=kw.get('password','secret'),
+			db=kw.get('db','py3web'),
 			charset=kw.get('charset','utf8'),
 			autocommit=kw.get('autocommit',True),
 			maxsize=kw.get('maxsize',10),
@@ -49,6 +49,7 @@ async def select(sql,args, size=None):
 
 async def execute(sql, args, autocommit=True):
 	log(sql)
+	# global __pool
 	async with __pool.get() as conn:
 		if not autocommit:
 			await conn.begin()
@@ -76,7 +77,7 @@ class Field(object):
 	def __init__(self, name, column_type,primary_key,default):
 		self.name = name
 		self.column_type = column_type
-		self.primary_key = primary_key
+		self.primaryKey = primary_key
 		self.default = default
 
 	def __str__(self):
@@ -93,7 +94,7 @@ class BooleanField(Field):
 
 
 class IntegerField(Field):
-	def __init__(self,name=None, primary_key=False, deault=0):
+	def __init__(self,name=None, primary_key=False, default=0):
 		super().__init__(name,'bigint',primary_key, default)
 
 
@@ -119,7 +120,7 @@ class ModelMetaclass(type):
 		primaryKey = None
 		for k, v in attrs.items():
 			if isinstance(v, Field):
-				logging.info('  found mapping: %s ==> %x ' %(k,v))
+				logging.info('  found mapping: %s ==> %s ' % (k,v))
 				mappings[k] = v
 				if v.primaryKey : 
 					if primaryKey:
