@@ -1,2 +1,2 @@
 ./py3web/www/test.py
-./py3web/www/__pycache__
+./py3web/www/__pycache__/*
