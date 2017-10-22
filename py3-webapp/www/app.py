@@ -16,6 +16,8 @@ from jinja2 import Environment, FileSystemLoader
 import orm
 from coreweb import add_routes, add_static
 
+import pudb;pu.db
+
 # 初始化模板引擎
 def init_jinja2(app,**kw):
 	logging.info('init jinja2...')
