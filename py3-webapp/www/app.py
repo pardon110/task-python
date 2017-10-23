@@ -16,7 +16,7 @@ from jinja2 import Environment, FileSystemLoader
 import orm
 from coreweb import add_routes, add_static
 
-import pudb;pu.db
+#import pudb;pu.db
 
 # 初始化模板引擎
 def init_jinja2(app,**kw):
@@ -83,6 +83,7 @@ async def response_factory(app,handler):
 			if isinstance(t, int) and t >=100 and t < 600:
 				return web.Response(t,str(m))
 		#default:
+		logging.info('default response...')
 		resp = web.Response(body=str(r).encode('utf-8'))
 		resp.content_type = 'text/plain;charset=utf-8'
 		return resp

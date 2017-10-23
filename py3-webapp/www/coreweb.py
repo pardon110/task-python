@@ -90,13 +90,14 @@ def has_request_arg(fn):
 class RequestHandler(object):
 	"""docstring for RequestHandler"""
 	def __init__(self, app, fn):
+		logging.info('enter response init')
 		self._app = app
-		self._fn = fn
+		self._func= fn
 		self._has_request_arg = has_request_arg(fn)
 		self._has_var_kw_arg = has_var_kw_arg(fn)
-		self._has_named_kw_args= hasnamed_kw_args(fn)
-		self._named_kw_args = named_kw_args(fn)
-		self._required_kw_args = required_kw_args(fn)
+		self._has_named_kw_args= has_named_kw_args(fn)
+		self._named_kw_args = get_named_kw_args(fn)
+		self._required_kw_args = get_required_kw_args(fn)
 
 	async def __call__(self, request):
 		kw = None
@@ -161,9 +162,9 @@ def add_route(app,fn):
 	path = getattr(fn, '__route__', None)
 	if path is None or method is None:
 		raise ValueError('@get or @post not definitined in %s.' % str(fn))
-	if not asyncio.iscoroutine(fn) and not inspect.isgeneratorfunction(fn):
+	if not asyncio.iscoroutinefunction(fn) and not inspect.isgeneratorfunction(fn):
 		fn = asyncio.coroutine(fn)
-	logging.info('add route %s %s => %s(%s)' % (method, path, fn.__name__, ','.join(inspect.signature(fn).parameters())))
+	logging.info('add route %s %s => %s(%s)' % (method, path, fn.__name__, ','.join(inspect.signature(fn).parameters.keys())))
 	app.router.add_route(method,path,RequestHandler(app,fn))
 
 
