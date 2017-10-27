@@ -54,7 +54,7 @@ async def execute(sql, args, autocommit=True):
 		if not autocommit:
 			await conn.begin()
 		try:
-			async with conn.cursor(aiomysql.DictCusor) as cur:
+			async with conn.cursor(aiomysql.DictCursor) as cur:
 				await cur.execute(sql.replace('?', '%s'), args)
 				affected = cur.rowcount
 			if not autocommit:
@@ -62,7 +62,7 @@ async def execute(sql, args, autocommit=True):
 		except BaseException as e:
 			if not autocommit:
 				await conn.rollback()
-			rasie
+			raise
 		return affected
 
 
@@ -146,6 +146,7 @@ class ModelMetaclass(type):
 
 class Model(dict, metaclass=ModelMetaclass):
 	def __init__(self, **kw):
+		logging.info('Model...')
 		super(Model,self).__init__(**kw)
 
 	def __getattr__(self,key):
@@ -214,6 +215,7 @@ class Model(dict, metaclass=ModelMetaclass):
 		if len(rs) == 0:
 			return None
 		return cls(**rs[0])
+
 
 	async def save(self):
 		args = list(map(self.getValueOrDefault, self.__fields__))	
