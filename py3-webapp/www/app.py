@@ -11,7 +11,7 @@ import asyncio,os,json,time
 from datetime import datetime
 
 from aiohttp import web
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader,filters
 
 import orm
 from coreweb import add_routes, add_static
@@ -90,19 +90,19 @@ async def response_factory(app,handler):
 	return response
 
 def datetime_filter(t):
-	delta = init(time.time() - t)
+	delta = int(time.time() - t)
 	if delta < 60:
-		return u'1分仲前'
+		return u'1分钟前'
 	if delta < 3600:
 		return u'%s分钟前' % (delta // 60)
 	if delta < 86400:
 		return u'%s小时前' % (delta // 3600)
 	if delta < 604800:
-		return u('%s天前' % (delata // 86400))
+		return u'%s天前' % (delata // 86400)
 	dt = datetime.fromtimestamp(t)
 	return u'%s年%s月%s日' % (dt.year, dt.month, dt.day)
 
-
+#filters.FILTERS['datetime'] = datetime_filter
 
 # 初始循环事件句柄 
 async def init(loop):
@@ -113,14 +113,14 @@ async def init(loop):
 			logger_factory,response_factory
 		])
 	# 初始化模板引擎
-	init_jinja2(app, filter=dict(datetime=datetime_filter))
+	init_jinja2(app, filters=dict(datetime=datetime_filter))
 
 	# 批量添加路由模块
 	add_routes(app,'handlers')
 	add_static(app)
 
-	srv = await loop.create_server(app.make_handler(), '0.0.0.0',8848)
-	logging.info('server started at http://0.0.0.0:8848')
+	srv = await loop.create_server(app.make_handler(), '0.0.0.0',8858)
+	logging.info('server started at http://0.0.0.0:8858')
 	return srv
 
 
