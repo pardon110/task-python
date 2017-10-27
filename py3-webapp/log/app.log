@@ -1,0 +1,363 @@
+INFO:root:Request: GET /
+INFO:root:Response handler...
+INFO:root:call with args: {'request': <Request GET / >}
+ERROR:aiohttp.server:Error handling request
+Traceback (most recent call last):
+  File "/home/vagrant/.local/lib/python3.5/site-packages/aiohttp/web_protocol.py", line 422, in start
+    resp = yield from self._request_handler(request)
+  File "/home/vagrant/.local/lib/python3.5/site-packages/aiohttp/web.py", line 306, in _handle
+    resp = yield from handler(request)
+  File "/home/vagrant/master-python/task/py3-webapp/www/app.py", line 49, in logger
+    return (await handler(request))
+  File "/home/vagrant/master-python/task/py3-webapp/www/app.py", line 56, in response
+    r =  await handler(request)
+  File "/home/vagrant/.local/lib/python3.5/site-packages/aiohttp/web_urldispatcher.py", line 115, in handler_wrapper
+    result = yield from result
+  File "/home/vagrant/master-python/task/py3-webapp/www/coreweb.py", line 147, in __call__
+    r = await self._func(**kw)
+  File "/usr/lib/python3.5/asyncio/coroutines.py", line 219, in coro
+    res = yield from await_meth()
+  File "/home/vagrant/master-python/task/py3-webapp/www/handlers.py", line 24, in index
+    Blog(id='1',name='Test Blog',summmary=summary,created_at=time()-120),
+TypeError: 'module' object is not callable
+INFO:aiohttp.access:127.0.0.1 - - [24/Oct/2017:03:11:25 +0000] "GET / HTTP/1.1" 500 330 "-" "HTTPie/0.9.2"
+INFO:root:create database connection pool...
+INFO:root:init jinja2...
+INFO:root:set jinja2 template path: /home/vagrant/master-python/task/py3-webapp/www/templates/
+INFO:root:found model: User (table: users
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: admin ==> <BooleanField, boolean:None> 
+INFO:root:  found mapping: passwd ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: email ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:found model: Blog (table: blogs
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: summary ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:found model: Comment (table: comments
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: blog_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:add route GET / => index(request)
+INFO:root:enter response init
+INFO:root:add static /static/ => /home/vagrant/master-python/task/py3-webapp/www/static
+INFO:root:server started at http://127.0.0.1:9000
+INFO:root:Request: GET /
+INFO:root:Response handler...
+INFO:root:call with args: {'request': <Request GET / >}
+INFO:root:SQL: select `id`, `name`, `admin`, `passwd`, `image`, `created_at`, `email` from `users`
+INFO:root:rows reutrned: 1 
+INFO:aiohttp.access:127.0.0.1 - - [24/Oct/2017:03:18:01 +0000] "GET / HTTP/1.1" 200 362 "-" "HTTPie/0.9.2"
+INFO:root:Request: GET /
+INFO:root:Response handler...
+INFO:root:call with args: {'request': <Request GET / >}
+INFO:root:SQL: select `id`, `name`, `admin`, `passwd`, `image`, `created_at`, `email` from `users`
+INFO:root:rows reutrned: 1 
+INFO:aiohttp.access:127.0.0.1 - - [24/Oct/2017:03:59:47 +0000] "GET / HTTP/1.1" 200 362 "-" "HTTPie/0.9.2"
+INFO:root:create database connection pool...
+INFO:root:init jinja2...
+INFO:root:set jinja2 template path: /home/vagrant/master-python/task/py3-webapp/www/templates/
+INFO:root:found model: User (table: users
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: passwd ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: admin ==> <BooleanField, boolean:None> 
+INFO:root:  found mapping: email ==> <StringField, varchar(50):None> 
+INFO:root:found model: Blog (table: blogs
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: summary ==> <StringField, varchar(50):None> 
+INFO:root:found model: Comment (table: comments
+INFO:root:  found mapping: blog_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:add route GET / => index(request)
+INFO:root:enter response init
+INFO:root:add static /static/ => /home/vagrant/master-python/task/py3-webapp/www/static
+INFO:root:server started at http://127.0.0.1:9000
+INFO:root:Request: GET /
+INFO:root:Response handler...
+INFO:root:call with args: {'request': <Request GET / >}
+INFO:root:SQL: select `id`, `created_at`, `passwd`, `image`, `name`, `admin`, `email` from `users`
+INFO:root:rows reutrned: 1 
+INFO:aiohttp.access:127.0.0.1 - - [24/Oct/2017:05:57:31 +0000] "GET / HTTP/1.1" 200 362 "-" "HTTPie/0.9.2"
+INFO:root:Request: GET /
+INFO:root:Response handler...
+INFO:root:call with args: {'request': <Request GET / >}
+INFO:root:SQL: select `id`, `created_at`, `passwd`, `image`, `name`, `admin`, `email` from `users`
+INFO:root:rows reutrned: 1 
+INFO:aiohttp.access:127.0.0.1 - - [24/Oct/2017:06:01:38 +0000] "GET / HTTP/1.1" 200 362 "-" "HTTPie/0.9.2"
+INFO:root:Request: GET /
+INFO:root:Response handler...
+INFO:root:call with args: {'request': <Request GET / >}
+INFO:root:SQL: select `id`, `created_at`, `passwd`, `image`, `name`, `admin`, `email` from `users`
+INFO:root:rows reutrned: 1 
+INFO:aiohttp.access:127.0.0.1 - - [24/Oct/2017:06:06:49 +0000] "GET / HTTP/1.1" 200 362 "-" "HTTPie/0.9.2"
+INFO:root:create database connection pool...
+INFO:root:init jinja2...
+INFO:root:set jinja2 template path: /home/vagrant/master-python/task/py3-webapp/www/templates/
+INFO:root:found model: User (table: users
+INFO:root:  found mapping: admin ==> <BooleanField, boolean:None> 
+INFO:root:  found mapping: passwd ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: email ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:found model: Blog (table: blogs
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: summary ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:found model: Comment (table: comments
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: blog_id ==> <StringField, varchar(50):None> 
+INFO:root:add route GET / => index(request)
+INFO:root:enter response init
+INFO:root:add static /static/ => /home/vagrant/master-python/task/py3-webapp/www/static
+INFO:root:server started at http://127.0.0.1:9000
+INFO:root:Request: GET /
+INFO:root:Response handler...
+INFO:root:call with args: {'request': <Request GET / >}
+INFO:root:SQL: select `id`, `admin`, `passwd`, `image`, `created_at`, `name`, `email` from `users`
+INFO:root:rows reutrned: 1 
+INFO:aiohttp.access:127.0.0.1 - - [24/Oct/2017:06:50:06 +0000] "GET / HTTP/1.1" 200 362 "-" "HTTPie/0.9.2"
+INFO:root:Request: GET /
+INFO:root:Response handler...
+INFO:root:call with args: {'request': <Request GET / >}
+INFO:root:SQL: select `id`, `admin`, `passwd`, `image`, `created_at`, `name`, `email` from `users`
+INFO:root:rows reutrned: 1 
+INFO:aiohttp.access:127.0.0.1 - - [24/Oct/2017:06:51:02 +0000] "GET / HTTP/1.1" 200 362 "-" "HTTPie/0.9.2"
+INFO:root:create database connection pool...
+INFO:root:init jinja2...
+INFO:root:set jinja2 template path: /home/vagrant/master-python/task/py3-webapp/www/templates/
+INFO:root:found model: User (table: users
+INFO:root:  found mapping: admin ==> <BooleanField, boolean:None> 
+INFO:root:  found mapping: email ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: passwd ==> <StringField, varchar(50):None> 
+INFO:root:found model: Blog (table: blogs
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: summary ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:found model: Comment (table: comments
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: blog_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:add route GET / => index(request)
+INFO:root:enter response init
+INFO:root:add static /static/ => /home/vagrant/master-python/task/py3-webapp/www/static
+INFO:root:server started at http://127.0.0.1:9000
+INFO:root:Request: GET /
+INFO:root:Response handler...
+INFO:root:call with args: {'request': <Request GET / >}
+INFO:root:SQL: select `id`, `admin`, `email`, `name`, `created_at`, `image`, `passwd` from `users`
+INFO:root:rows reutrned: 1 
+INFO:aiohttp.access:127.0.0.1 - - [24/Oct/2017:07:33:08 +0000] "GET / HTTP/1.1" 200 362 "-" "HTTPie/0.9.2"
+INFO:root:Request: GET /
+INFO:root:Response handler...
+INFO:root:call with args: {'request': <Request GET / >}
+INFO:root:SQL: select `id`, `admin`, `email`, `name`, `created_at`, `image`, `passwd` from `users`
+INFO:root:rows reutrned: 1 
+INFO:aiohttp.access:127.0.0.1 - - [24/Oct/2017:07:42:29 +0000] "GET / HTTP/1.1" 200 362 "-" "HTTPie/0.9.2"
+INFO:root:Request: GET /
+INFO:root:Response handler...
+INFO:root:call with args: {'request': <Request GET / >}
+INFO:root:SQL: select `id`, `admin`, `email`, `name`, `created_at`, `image`, `passwd` from `users`
+INFO:root:rows reutrned: 1 
+INFO:aiohttp.access:127.0.0.1 - - [24/Oct/2017:07:43:32 +0000] "GET / HTTP/1.1" 200 362 "-" "HTTPie/0.9.2"
+INFO:root:Request: GET /
+INFO:root:Response handler...
+INFO:root:call with args: {'request': <Request GET / >}
+INFO:root:SQL: select `id`, `admin`, `email`, `name`, `created_at`, `image`, `passwd` from `users`
+INFO:root:rows reutrned: 1 
+INFO:aiohttp.access:127.0.0.1 - - [24/Oct/2017:07:47:18 +0000] "GET / HTTP/1.1" 200 362 "-" "HTTPie/0.9.2"
+INFO:root:Request: GET /
+INFO:root:Response handler...
+INFO:root:call with args: {'request': <Request GET / >}
+INFO:root:SQL: select `id`, `admin`, `email`, `name`, `created_at`, `image`, `passwd` from `users`
+INFO:root:rows reutrned: 1 
+INFO:aiohttp.access:127.0.0.1 - - [24/Oct/2017:07:58:43 +0000] "GET / HTTP/1.1" 200 362 "-" "HTTPie/0.9.2"
+INFO:root:Request: GET /
+INFO:root:Response handler...
+INFO:root:call with args: {'request': <Request GET / >}
+INFO:root:SQL: select `id`, `admin`, `email`, `name`, `created_at`, `image`, `passwd` from `users`
+INFO:root:rows reutrned: 1 
+INFO:aiohttp.access:127.0.0.1 - - [24/Oct/2017:08:04:14 +0000] "GET / HTTP/1.1" 200 362 "-" "HTTPie/0.9.2"
+INFO:root:create database connection pool...
+INFO:root:init jinja2...
+INFO:root:set jinja2 template path: /home/vagrant/master-python/task/py3-webapp/www/templates/
+INFO:root:found model: User (table: users
+INFO:root:  found mapping: email ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: admin ==> <BooleanField, boolean:None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: passwd ==> <StringField, varchar(50):None> 
+INFO:root:found model: Blog (table: blogs
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: summary ==> <StringField, varchar(50):None> 
+INFO:root:found model: Comment (table: comments
+INFO:root:  found mapping: blog_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:add route GET / => index(request)
+INFO:root:enter response init
+INFO:root:add static /static/ => /home/vagrant/master-python/task/py3-webapp/www/static
+INFO:root:server started at http://127.0.0.1:9000
+INFO:root:Request: GET /
+INFO:root:Response handler...
+INFO:root:call with args: {'request': <Request GET / >}
+INFO:root:SQL: select `id`, `email`, `created_at`, `admin`, `name`, `image`, `passwd` from `users`
+INFO:root:rows reutrned: 1 
+INFO:aiohttp.access:127.0.0.1 - - [24/Oct/2017:08:22:25 +0000] "GET / HTTP/1.1" 200 362 "-" "HTTPie/0.9.2"
+INFO:root:create database connection pool...
+INFO:root:init jinja2...
+INFO:root:set jinja2 template path: /home/vagrant/master-python/task/py3-webapp/www/templates/
+INFO:root:found model: User (table: users
+INFO:root:  found mapping: image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: passwd ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: email ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: admin ==> <BooleanField, boolean:None> 
+INFO:root:found model: Blog (table: blogs
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: summary ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:found model: Comment (table: comments
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: blog_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:add route GET / => index(request)
+INFO:root:enter response init
+INFO:root:add static /static/ => /home/vagrant/master-python/task/py3-webapp/www/static
+INFO:root:server started at http://127.0.0.1:9000
+INFO:root:create database connection pool...
+INFO:root:init jinja2...
+INFO:root:set jinja2 template path: /home/vagrant/master-python/task/py3-webapp/www/templates/
+INFO:root:found model: User (table: users
+INFO:root:  found mapping: email ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: passwd ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: admin ==> <BooleanField, boolean:None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:found model: Blog (table: blogs
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: summary ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:found model: Comment (table: comments
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: blog_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:add route GET / => index(request)
+INFO:root:enter response init
+INFO:root:add static /static/ => /home/vagrant/master-python/task/py3-webapp/www/static
+INFO:root:server started at http://127.0.0.1:9000
+INFO:root:create database connection pool...
+INFO:root:init jinja2...
+INFO:root:set jinja2 template path: /home/vagrant/master-python/task/py3-webapp/www/templates/
+INFO:root:found model: User (table: users
+INFO:root:  found mapping: image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: email ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: admin ==> <BooleanField, boolean:None> 
+INFO:root:  found mapping: passwd ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:found model: Blog (table: blogs
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: summary ==> <StringField, varchar(50):None> 
+INFO:root:found model: Comment (table: comments
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: blog_id ==> <StringField, varchar(50):None> 
+INFO:root:add route GET / => index(request)
+INFO:root:enter response init
+INFO:root:add static /static/ => /home/vagrant/master-python/task/py3-webapp/www/static
+INFO:root:server started at http://127.0.0.1:9000
