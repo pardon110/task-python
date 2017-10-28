@@ -90,7 +90,6 @@ def has_request_arg(fn):
 class RequestHandler(object):
 	"""docstring for RequestHandler"""
 	def __init__(self, app, fn):
-		logging.info('enter response init')
 		self._app = app
 		self._func= fn
 		self._has_request_arg = has_request_arg(fn)
@@ -105,13 +104,13 @@ class RequestHandler(object):
 			if request.method == 'POST':
 				if not request.content_type:
 					return web.HTTPBadRequest('Missing Content-Type.')
-				ct = request.contetnt_type.lower()
-				if ct.startwith('application/json'):
+				ct = request.content_type.lower()
+				if ct.startswith('application/json'):
 					params = await request.json()
 					if not isinstance(params, dict):
 						return web.HTTPBadRequest('JSON body must be object.')
 					kw = params
-				elif ct.startwith('application/x-www-form-urlencoded') or ct.startwith('multipart/form-data'):
+				elif ct.startswith('application/x-www-form-urlencoded') or ct.startswith('multipart/form-data'):
 					params = await request.post()
 					kw = dict(**params)
 				else:
@@ -140,8 +139,7 @@ class RequestHandler(object):
 		if self._required_kw_args:
 			for name in self._required_kw_args:
 				if not name in kw:
-					if not name in kw:
-						return web.HTTPBadRequest('Missing argument:%s' % name)
+					return web.HTTPBadRequest('Missing argument:%s' % name)
 		logging.info('call with args: %s' % str(kw))
 		try:
 			r = await self._func(**kw)

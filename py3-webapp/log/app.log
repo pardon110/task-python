@@ -566,3 +566,152 @@ Traceback (most recent call last):
     users = await User.findAll('email=?',[email])
                      ^
 SyntaxError: invalid syntax
+INFO:root:create database connection pool...
+INFO:root:init jinja2...
+INFO:root:set jinja2 template path: /home/vagrant/master-python/task/py3-webapp/www/templates/
+INFO:root:found model: User (table: users
+INFO:root:  found mapping: admin ==> <BooleanField, boolean:None> 
+INFO:root:  found mapping: email ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: passwd ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:found model: Blog (table: blogs
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: summary ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:found model: Comment (table: comments
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: blog_id ==> <StringField, varchar(50):None> 
+INFO:root:add route GET /api/users => api_get_users()
+INFO:root:enter response init
+INFO:root:add route POST /api/users => api_register_user(email,name,password)
+INFO:root:enter response init
+INFO:root:add route POST /api/authenticate => authenticate(email,passwd)
+INFO:root:enter response init
+INFO:root:add route GET / => index(request)
+INFO:root:enter response init
+INFO:root:add route GET /register => register()
+INFO:root:enter response init
+INFO:root:add route GET /signin => signin()
+INFO:root:enter response init
+INFO:root:add route GET /signout => signout(request)
+INFO:root:enter response init
+INFO:root:add route GET /test => test(request)
+INFO:root:enter response init
+INFO:root:add static /static/ => /home/vagrant/master-python/task/py3-webapp/www/static
+INFO:root:server started at http://0.0.0.0:8858
+INFO:root:Request: GET /favicon.ico
+INFO:root:Response handler...
+INFO:aiohttp.access:192.168.0.103 - - [28/Oct/2017:07:24:54 +0000] "GET /favicon.ico HTTP/1.1" 404 172 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0"
+INFO:root:Request: GET /
+INFO:root:Response handler...
+INFO:root:call with args: {'request': <Request GET / >}
+INFO:root:SQL: select `id`, `created_at`, `user_name`, `name`, `content`, `user_id`, `user_image`, `summary` from `blogs`
+INFO:root:rows reutrned: 1 
+INFO:root:Model...
+INFO:aiohttp.access:192.168.0.103 - - [28/Oct/2017:07:56:59 +0000] "GET / HTTP/1.1" 200 4595 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0"
+INFO:root:Request: GET /signin
+INFO:root:Response handler...
+INFO:root:call with args: {}
+INFO:aiohttp.access:192.168.0.103 - - [28/Oct/2017:07:57:03 +0000] "GET /signin HTTP/1.1" 200 2688 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0"
+INFO:root:Request: GET /register
+INFO:root:Response handler...
+INFO:root:call with args: {}
+INFO:aiohttp.access:192.168.0.103 - - [28/Oct/2017:07:57:06 +0000] "GET /register HTTP/1.1" 200 6611 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0"
+INFO:root:Request: GET /register
+INFO:root:Response handler...
+INFO:root:call with args: {}
+INFO:aiohttp.access:192.168.0.103 - - [28/Oct/2017:08:00:41 +0000] "GET /register HTTP/1.1" 200 6611 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0"
+INFO:root:Request: GET /register
+INFO:root:Response handler...
+INFO:root:call with args: {}
+INFO:aiohttp.access:192.168.0.103 - - [28/Oct/2017:08:14:39 +0000] "GET /register HTTP/1.1" 200 6596 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0"
+INFO:root:Request: GET /static/css/uikit.min.css
+INFO:root:Response handler...
+INFO:aiohttp.access:192.168.0.103 - - [28/Oct/2017:08:14:39 +0000] "GET /static/css/uikit.min.css HTTP/1.1" 304 140 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0"
+INFO:root:Request: GET /static/js/sticky.min.js
+INFO:root:Response handler...
+INFO:aiohttp.access:192.168.0.103 - - [28/Oct/2017:08:14:39 +0000] "GET /static/js/sticky.min.js HTTP/1.1" 304 140 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0"
+INFO:root:Request: GET /static/css/uikit.gradient.min.css
+INFO:root:Response handler...
+INFO:aiohttp.access:192.168.0.103 - - [28/Oct/2017:08:14:39 +0000] "GET /static/css/uikit.gradient.min.css HTTP/1.1" 304 140 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0"
+INFO:root:Request: GET /static/js/vue.min.js
+INFO:root:Response handler...
+INFO:aiohttp.access:192.168.0.103 - - [28/Oct/2017:08:14:39 +0000] "GET /static/js/vue.min.js HTTP/1.1" 304 140 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0"
+INFO:root:Request: GET /static/css/awesome.css
+INFO:root:Response handler...
+INFO:aiohttp.access:192.168.0.103 - - [28/Oct/2017:08:14:39 +0000] "GET /static/css/awesome.css HTTP/1.1" 304 140 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0"
+INFO:root:Request: GET /static/js/jquery.min.js
+INFO:root:Response handler...
+INFO:aiohttp.access:192.168.0.103 - - [28/Oct/2017:08:14:39 +0000] "GET /static/js/jquery.min.js HTTP/1.1" 304 140 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0"
+INFO:root:Request: GET /static/js/awesome.js
+INFO:root:Response handler...
+INFO:aiohttp.access:192.168.0.103 - - [28/Oct/2017:08:14:39 +0000] "GET /static/js/awesome.js HTTP/1.1" 304 140 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0"
+INFO:root:Request: GET /static/js/sha1.min.js
+INFO:root:Response handler...
+INFO:aiohttp.access:192.168.0.103 - - [28/Oct/2017:08:14:39 +0000] "GET /static/js/sha1.min.js HTTP/1.1" 304 140 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0"
+INFO:root:Request: GET /static/js/uikit.min.js
+INFO:root:Response handler...
+INFO:aiohttp.access:192.168.0.103 - - [28/Oct/2017:08:14:39 +0000] "GET /static/js/uikit.min.js HTTP/1.1" 304 140 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0"
+INFO:root:Request: GET /register
+INFO:root:Response handler...
+INFO:root:call with args: {}
+INFO:aiohttp.access:192.168.0.103 - - [28/Oct/2017:08:14:42 +0000] "GET /register HTTP/1.1" 200 6596 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0"
+INFO:root:found model: User (table: users
+INFO:root:  found mapping: email ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: admin ==> <BooleanField, boolean:None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: passwd ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:found model: Blog (table: blogs
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: summary ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:found model: Comment (table: comments
+INFO:root:  found mapping: blog_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_image ==> <StringField, varchar(500):None> 
+INFO:root:  found mapping: created_at ==> <FloatField, real:None> 
+INFO:root:  found mapping: user_name ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: user_id ==> <StringField, varchar(50):None> 
+INFO:root:  found mapping: content ==> <TextField, text:None> 
+INFO:root:  found mapping: id ==> <StringField, varchar(50):None> 
+INFO:root:create database connection pool...
+INFO:root:init jinja2...
+INFO:root:set jinja2 template path: /home/vagrant/master-python/task/py3-webapp/www/templates/
+INFO:root:add route GET /api/users => api_get_users()
+INFO:root:enter response init
+INFO:root:add route POST /api/users => api_register_user(email,name,password)
+INFO:root:enter response init
+INFO:root:add route POST /api/authenticate => authenticate(email,passwd)
+INFO:root:enter response init
+INFO:root:add route GET / => index(request)
+INFO:root:enter response init
+INFO:root:add route GET /register => register()
+INFO:root:enter response init
+INFO:root:add route GET /signin => signin()
+INFO:root:enter response init
+INFO:root:add route GET /signout => signout(request)
+INFO:root:enter response init
+INFO:root:add route GET /test => test(request)
+INFO:root:enter response init
+INFO:root:add static /static/ => /home/vagrant/master-python/task/py3-webapp/www/static
+INFO:root:server started at http://0.0.0.0:8848

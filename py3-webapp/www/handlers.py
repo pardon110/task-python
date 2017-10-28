@@ -108,12 +108,13 @@ _RE_SHA1 = re.compile(r'^[0-9a-f]{40}$')
 
 
 @post('/api/users')
-async def api_register_user(*,email,name,password):
+async def api_register_user(*,email,name,passwd):
+	logging.info('register api users')
 	if not name or not name.strip():
 		raise APIValueError('name')
 	if not email or not _RE_EMAIL.match(email):
 		raise APIValueError('email')
-	if not passwd or not _RE_SHA1.match(passpwd):
+	if not passwd or not _RE_SHA1.match(passwd):
 		raise APIValueError('passwd')
 	users = await User.findAll('email=?', [email])
 	if len(users) > 0:
