@@ -62,17 +62,19 @@ async def  auth_factory(app, handler):
 		if cookie_str:
 			user = await cookie2user(cookie_str)
 			if user:
-				logging.info('set current user:%s' % user.email)
+				logging.info('log_s: current user:%s' % user.email)
 				request.__user__ = user
 		if request.path.startswith('/manage/') and (request.__user__ is None or not request.__user__.admin):
 			return web.HTTPFound('/signin')
-		return (await handler(request))
+		logging.info(request.__user__.name)
+		return await handler(request)
 	return auth
 
 
 async def data_factory(app, handler):
 	async def parse_data(request):
 		if request.method == 'POST':
+			logging.info('post....factory:')
 			if request.content_type.startswith('application/json'):
 				request.__data__ = await request.json()
 				logging.info('request json: %s' % str(request.__data__))
@@ -153,8 +155,8 @@ async def init(loop):
 	add_routes(app,'handlers')
 	add_static(app)
 
-	srv = await loop.create_server(app.make_handler(), '0.0.0.0',8858)
-	logging.info('server started at http://0.0.0.0:8858')
+	srv = await loop.create_server(app.make_handler(), '0.0.0.0',8868)
+	logging.info('server started at http://0.0.0.0:8868')
 	return srv
 
 
