@@ -78,7 +78,7 @@ def has_request_arg(fn):
 		if name == 'request':
 			found = True
 			continue
-		if found and (param.kind !=inspect.Parameter.VAR_POSITIONAL and param.kind != inspect.Parameter.KEYWORD_ONLY and param.kind !=insapect.Parameter.VAR_KEYWORD):
+		if found and (param.kind !=inspect.Parameter.VAR_POSITIONAL and param.kind != inspect.Parameter.KEYWORD_ONLY and param.kind !=inspect.Parameter.VAR_KEYWORD):
 			raise ValueError('request parameter must be the last named prameter in function:%s%s' % (fn.__name__, str(sig)))			
 	return found		
 
@@ -140,7 +140,7 @@ class RequestHandler(object):
 			for name in self._required_kw_args:
 				if not name in kw:
 					return web.HTTPBadRequest('Missing argument:%s' % name)
-		logging.info('call with args: %s' % str(kw))
+		logging.info('calls with args: %s' % str(kw))
 		try:
 			r = await self._func(**kw)
 			return r

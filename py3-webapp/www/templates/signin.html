@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>登录 - Awesome Python Webapp</title>
+    <title>登录 - pardon110 Python Webapp</title>
     <link rel="stylesheet" href="/static/css/uikit.min.css">
     <link rel="stylesheet" href="/static/css/uikit.gradient.min.css">
     <script src="/static/js/jquery.min.js"></script>
@@ -27,10 +27,11 @@
 							email = this.email.trim().toLowerCase(),
 							data = {
 								email:email,
-								passwd:this.passwd==='' ? '' : CryptoJS.SHAI(email + ':' + this.passwd).toString()
+								passwd:this.passwd==='' ? '' : CryptoJS.SHA1(email + ':' + this.passwd).toString()
 							};
 						$form.postJSON('/api/authenticate',data,function(err,result){
 							if(!err){
+								alert('hehe...');
 								location.assign('/');
 							}
 						});

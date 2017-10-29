@@ -47,7 +47,7 @@ async def cookie2user(cookie_str):
 		user = await User.find(uid)
 		if user is None:
 			return None
-		s = '%s-%s-%s-%s' % (user.id, user.passwd,expires,_COOKIE_KEY)
+		s = '%s-%s-%s-%s' % (uid, user.passwd,expires,_COOKIE_KEY)
 		if sha1 != hashlib.sha1(s.encode('utf-8')).hexdigest():
 			logging.info('invaild shal')
 			return None
@@ -72,6 +72,7 @@ def signin():
 
 @post('/api/authenticate')
 async def authenticate(*,email, passwd):
+	logging.info('api---auth....')
 	if not email:
 		raise APIValueError('email', 'Invalid email.')
 	if not passwd:
@@ -99,7 +100,7 @@ async def authenticate(*,email, passwd):
 def signout(request):
 	referer = request.headers.get('Referer')
 	r = web.HTTPFound(referer or '/')
-	r.set_cookie(cookie_name, '-deleted-', max_age=0, httponly=True)
+	r.set_cookie(COOKIE_NAME, '-deleted-', max_age=0, httponly=True)
 	logging.info('user signed out.')
 	return r
 
@@ -136,22 +137,23 @@ async def api_register_user(*,email,name,passwd):
 @get('/')
 async def index(request):
 	# users = await User.findAll()
+	logging.info(request.__user__)
 	blogs = await Blog.findAll()
 	return {
 		'__template__':'blogs.html',
 		'blogs':blogs
 	}
 
-@get('/api/users')
-async def api_get_users():
-	users = await User.findAll(orderBy='created_at desc')
-	for u in users:
-		u.passwd = '******'
-	return dict(users=users)
+#@get('/api/users')
+#async def api_get_users():
+#	users = await User.findAll(orderBy='created_at desc')
+#	for u in users:
+#		u.passwd = '******'
+#	return dict(users=users)
 
 
 @get('/test')
-async def test(request):
+async def test():
 	summary = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 	b = Blog(id='389797979', name='Learn Swift', summary=summary, created_at=time.time()-7200)
 	await b.save()
