@@ -9,7 +9,7 @@ function initVM(data) {
     var vm = new Vue({
         el: '#vm',
         data: {
-            blogs: data.blogs,
+            blogs: data.blog,
             page: data.page
         },
         methods: {
@@ -17,7 +17,7 @@ function initVM(data) {
                 location.assign('/manage/blogs/edit?id=' + blog.id);
             },
             delete_blog: function(blog) {
-                if (confirm('确认要删除"' + '"?删除后不可恢复！')) {
+                if (confirm('确认要删除“' + blog.name + '”?删除后不可恢复！')) {
                     postJSON('/api/blogs/' + blog.id + '/delete', function(err, r) {
                         if (err) {
                             return alert(err.message || err.error || err);
@@ -32,8 +32,8 @@ function initVM(data) {
 }
 
 $(function() {
-    getJSON('/api/blogs/', {
-        page: { { page_index } }
+    getJSON('/api/blogs', {
+        page: {{  page_index }}
     }, function(err, results) {
         if (err) {
             return fatal(err);

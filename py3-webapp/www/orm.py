@@ -15,7 +15,7 @@ def log(sql,args=()):
 
 
 # 创建连接池 协程 
-
+	
 async def create_pool(loop,**kw):
 	logging.info('create database connection pool...')
 	global __pool
@@ -190,9 +190,9 @@ class Model(dict, metaclass=ModelMetaclass):
 			if isinstance(limit, int):
 				sql.append('?')
 				args.append(limit)
-			elif isinstance(limit,tuple and len(limit) ==2):
+			elif isinstance(limit,tuple) and len(limit) ==2:
 				sql.append('?, ?')
-				args.extends(limit)
+				args.extend(limit)
 			else:
 				raise ValueError('Invalid limit value: %s' % str(limit))
 		rs = await select( ' '.join(sql), args)
