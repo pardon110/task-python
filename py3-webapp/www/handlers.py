@@ -16,7 +16,7 @@ from apis import Page,APIValueError, APIResourceNotFoundError,APIError,APIPermis
 from models import Blog,User,Comment,next_id
 from config import configs
 
-COOKIE_NAME = 'awesession'
+COOKIE_NAME = 'pardonsession'
 _COOKIE_KEY = configs.session.secret
 
 def check_admin(request):
@@ -51,7 +51,7 @@ def text2html(text):
 
 
 async def cookie2user(cookie_str):
-	# Parse cookie and load user if cookie is valid
+	# Parse cookie and load user 
 	if not cookie_str:
 		return None
 	try:
@@ -162,7 +162,7 @@ async def index(request):
 @get('/blog/{id}')
 async def get_blog(id):
 	blog = await Blog.find(id)
-	comments = await Comment.findAll('blog_id=?', [id], orderBy='create_at desc')
+	comments = await Comment.findAll('blog_id=?', [id], orderBy='created_at desc')
 	for c in comments:
 		c.html_content = text2html(c.content)
 	blog.html_content = markdown2.markdown(blog.content)
