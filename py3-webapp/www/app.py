@@ -66,8 +66,7 @@ async def  auth_factory(app, handler):
 				request.__user__ = user
 		if request.path.startswith('/manage/') and (request.__user__ is None or not request.__user__.admin):
 			return web.HTTPFound('/signin')
-		logging.info(request.__user__.name)
-		return await handler(request)
+		return (await handler(request))
 	return auth
 
 
@@ -97,6 +96,7 @@ async def response_factory(app,handler):
 			resp.content_type = 'application/octet-stream'
 			return resp
 		if isinstance(r, str):
+			logging.info('str...instance')
 			if r.startswith('redirect:'):
 				return web.HTTPFound(r[9:])
 			resp = web.Response(body=r.encode('utf-8'))
@@ -105,10 +105,11 @@ async def response_factory(app,handler):
 		if isinstance(r,dict):
 			template = r.get('__template__')
 			if template is None:
-				resp = web.Response(body=json.dump(r, ensure_ascii=False, default=lambda o:o.__dict__).encode('uft-8'))
+				resp = web.Response(body=json.dumps(r, ensure_ascii=False, default=lambda o:o.__dict__).encode('utf-8'))
 				resp.content_type = 'application/json;charset=utf-8'
 				return resp
 			else:
+				r['__user__'] = request.__user__
 				resp = web.Response(body=app['__templating__'].get_template(template).render(**r).encode('utf-8'))	
 				resp.content_type = 'text/html;charset=utf-8'
 				return resp
@@ -119,8 +120,8 @@ async def response_factory(app,handler):
 			if isinstance(t, int) and t >=100 and t < 600:
 				return web.Response(t,str(m))
 		#default:
-		logging.info('default response...')
 		resp = web.Response(body=str(r).encode('utf-8'))
+
 		resp.content_type = 'text/plain;charset=utf-8'
 		return resp
 	return response
@@ -155,8 +156,8 @@ async def init(loop):
 	add_routes(app,'handlers')
 	add_static(app)
 
-	srv = await loop.create_server(app.make_handler(), '0.0.0.0',8868)
-	logging.info('server started at http://0.0.0.0:8868')
+	srv = await loop.create_server(app.make_handler(), '0.0.0.0',8858)
+	logging.info('server started at http://0.0.0.0:8858')
 	return srv
 
 
