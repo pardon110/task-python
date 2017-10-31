@@ -54,6 +54,7 @@ async def logger_factory(app, handler):
 	return logger
 
 
+# 绑定当前用户到request 请求上
 async def  auth_factory(app, handler):
 	async def auth(request):
 		logging.info('check user: %s %s' % (request.method, request.path))
@@ -62,7 +63,7 @@ async def  auth_factory(app, handler):
 		if cookie_str:
 			user = await cookie2user(cookie_str)
 			if user:
-				logging.info('log_s: current user:%s' % user.email)
+				logging.info('set current user:%s' % user.email)
 				request.__user__ = user
 		if request.path.startswith('/manage/') and (request.__user__ is None or not request.__user__.admin):
 			return web.HTTPFound('/signin')
@@ -139,7 +140,6 @@ def datetime_filter(t):
 	dt = datetime.fromtimestamp(t)
 	return u'%s年%s月%s日' % (dt.year, dt.month, dt.day)
 
-#filters.FILTERS['datetime'] = datetime_filter
 
 # 初始循环事件句柄 
 async def init(loop):
@@ -156,8 +156,8 @@ async def init(loop):
 	add_routes(app,'handlers')
 	add_static(app)
 
-	srv = await loop.create_server(app.make_handler(), '0.0.0.0',8848)
-	logging.info('server started at http://0.0.0.0:8848')
+	srv = await loop.create_server(app.make_handler(), '0.0.0.0',8858)
+	logging.info('server started at http://0.0.0.0:8858')
 	return srv
 
 

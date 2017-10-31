@@ -18,7 +18,7 @@
 						if(err){
 							$form.showFormError(err);
 						}else{
-							return location.assign('/api/blogs/' + r.id);
+							return location.assign('/manage/blogs');
 						}
 					});
 				}
@@ -29,12 +29,12 @@
 
 	$(function(){
 		if(ID){
-			getJSON('api/blogs/' + ID, function(err, blog){
+			getJSON('/api/blogs/' + ID, function(err, blog){
 				if(err){
 					return fatal(err);
 				}
 				$('#loading').hide();
-				initVm(blog);
+				initVM(blog);
 			});
 		}else{
 			$('#loading').hide();
