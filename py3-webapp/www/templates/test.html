@@ -3,13 +3,138 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Test Users- Pardon110 Webapp</title>
+    <title>
+        Test Users- Pardon110 Webapp
+    </title>
 </head>
 
 <body>
-    <h1>This is  a testdfd page </h1> {% for u in users %}
-    <p>{{ u.name }} / {{ u.email }} </p>
+    <h1>
+            This is  a testdfd page
+        </h1> {% for u in users %}
+    <p>
+        {{ u.name }} / {{ u.email }}
+    </p>
     {% endfor %}
+    <ol id="test-list">
+        <li class="lang">
+            Scheme
+        </li>
+        <li class="lang">
+            JavaScript
+        </li>
+        <li class="lang">
+            Python
+        </li>
+        <li class="lang">
+            Ruby
+        </li>
+        <li class="lang">
+            Haskell
+        </li>
+    </ol>
+    <!-- HTML结构 -->
+    <h1>
+            把与Web开发技术不相关的节点删掉：
+        </h1>
+    <ul id="t-list">
+        <li>
+            JavaScript
+        </li>
+        <li>
+            Swift
+        </li>
+        <li>
+            HTML
+        </li>
+        <li>
+            ANSI C
+        </li>
+        <li>
+            CSS
+        </li>
+        <li>
+            DirectX
+        </li>
+    </ul>
+    <script>
+    // 正则，call借用上下文，箭头函数
+    var oP = document.getElementById('t-list');
+    var oL = oP.getElementsByTagName('li');
+    var reg = /(javascript)|(html)|(css)/gi;
+    /*
+    var oD = [].filter.call(oL, function(x) {
+        if (x.innerText.search(reg) == -1) {
+            return true;
+        }
+        return false;
+    });
+    console.log(oD);
+    var oN = [].map.call(oL, function(x) {
+        if (x.innerText.search(reg) == -1) {
+            oP.removeChild(x);
+            return false;
+        }
+        return x;
+    });
+    console.log(oN);
+    //箭头函数
+    [].map.call(oL, x => { if (x.innerText.search(reg) === -1) { oP.removeChild(x); return undefined; } return x; });
+    */
+    //极简方法
+    var oLi = document.querySelectorAll('#t-list>li');
+    [].map.call(oLi, x =>
+        // if (x.innerText.search(reg) === -1) { x.parentElement.removeChild(x); }
+        x.innerText.search(reg) === -1 ? x.parentElement.removeChild(x) : x
+    );
+    </script>
+    <!-- HTML结构 -->
+    <script>
+    'use strict';
+    var checkRegisterForm = function() {
+        // alert('kk');
+
+        var frm = document.getElementById('test-register');
+        var username = document.getElementById('username').value;
+        var pwd = document.getElementById('password').value;
+        var pwd2 = document.getElementById('password-2').value;
+        var u_rg = /\w{3,10}/;
+        var p_rg = /\*{6,20}/;
+        alert(username);
+        if (!(username && pwd && pwd2)) { alert('所有项不能为空！'); return false; }
+        if (!u_rg.test(username.trim())) { alert('username Error!'); return false; }
+        if (!p_rg.test(pwd.trim())) { alert('pwd Error!'); return false; }
+        if (pwd != pwd2) { alert('pwd not equal!'); return false; }
+        return true;
+    }
+    </script>
+    <form action="" id="test-register" onsubmit="return checkRegisterForm()" target="_blank">
+        <p id="test-error" style="color:red">
+        </p>
+        <p>
+            用户名:
+            <input id="username" name="username" type="text">
+            </input>
+        </p>
+        <p>
+            口令:
+            <input id="password" name="password" type="password">
+            </input>
+        </p>
+        <p>
+            重复口令:
+            <input id="password-2" type="password">
+            </input>
+        </p>
+        <p>
+            <button type="submit">
+                提交
+            </button>
+            <button type="reset">
+                重置
+            </button>
+        </p>
+    </form>
 </body>
 
 </html>
